@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "422280033507",
+    "project_id": "safepin-45d2c",
+    "storage_bucket": "safepin-45d2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422280033507:android:4fa4c5078ed3ce767441d6",
+        "android_client_info": {
+          "package_name": "com.flutterflow.safeping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422280033507-4i9b7p5flcj7aosonu2aga1p2usd3o74.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHII1spphcrHSEaYS72CKNOgkIEaEllwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422280033507-4i9b7p5flcj7aosonu2aga1p2usd3o74.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
