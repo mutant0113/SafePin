@@ -66,53 +66,53 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
+              StreamBuilder<List<UsersRecord>>(
+                stream: queryUsersRecord(
+                  singleRecord: true,
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  List<UsersRecord> rowUsersRecordList = snapshot.data;
+                  // Customize what your widget looks like with no query results.
+                  if (snapshot.data.isEmpty) {
+                    // return Container();
+                    // For now, we'll just include some dummy data.
+                    rowUsersRecordList = createDummyUsersRecord(count: 1);
+                  }
+                  final rowUsersRecord = rowUsersRecordList.first;
+                  return Row(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        width: 90,
-                        height: 90,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl: currentUserPhoto,
-                          fit: BoxFit.fill,
-                        ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: 90,
+                            height: 90,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: rowUsersRecord.photoUrl,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Text(
+                            rowUsersRecord.displayName,
+                            style: GoogleFonts.getFont(
+                              'Quicksand',
+                              color: Color(0xFF455A64),
+                              fontSize: 11,
+                            ),
+                          )
+                        ],
                       ),
-                      Text(
-                        currentUserDisplayName,
-                        style: GoogleFonts.getFont(
-                          'Quicksand',
-                          color: Color(0xFF455A64),
-                          fontSize: 11,
-                        ),
-                      )
-                    ],
-                  ),
-                  StreamBuilder<List<UsersRecord>>(
-                    stream: queryUsersRecord(
-                      singleRecord: true,
-                    ),
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      List<UsersRecord> rowUsersRecordList = snapshot.data;
-                      // Customize what your widget looks like with no query results.
-                      if (snapshot.data.isEmpty) {
-                        // return Container();
-                        // For now, we'll just include some dummy data.
-                        rowUsersRecordList = createDummyUsersRecord(count: 1);
-                      }
-                      final rowUsersRecord = rowUsersRecordList.first;
-                      return InkWell(
+                      InkWell(
                         onTap: () async {
                           await Navigator.pushAndRemoveUntil(
                             context,
@@ -131,7 +131,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  rowUsersRecord.mask.toString(),
+                                  rowRecord.mask.toString(),
                                   style: GoogleFonts.getFont(
                                     'Quicksand',
                                     color: Colors.black,
@@ -156,7 +156,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  rowUsersRecord.alcohol.toString(),
+                                  rowRecord.alcohol.toString(),
                                   style: GoogleFonts.getFont(
                                     'Quicksand',
                                     color: Colors.black,
@@ -181,7 +181,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  rowUsersRecord.food.toString(),
+                                  rowRecord.food.toString(),
                                   style: GoogleFonts.getFont(
                                     'Quicksand',
                                     color: Colors.black,
@@ -204,10 +204,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             )
                           ],
                         ),
-                      );
-                    },
-                  )
-                ],
+                      )
+                    ],
+                  );
+                },
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
