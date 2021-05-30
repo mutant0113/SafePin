@@ -131,7 +131,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  rowRecord.mask.toString(),
+                                  rowUsersRecord.mask.toString(),
                                   style: GoogleFonts.getFont(
                                     'Quicksand',
                                     color: Colors.black,
@@ -156,7 +156,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  rowRecord.alcohol.toString(),
+                                  rowUsersRecord.alcohol.toString(),
                                   style: GoogleFonts.getFont(
                                     'Quicksand',
                                     color: Colors.black,
@@ -181,7 +181,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  rowRecord.food.toString(),
+                                  rowUsersRecord.food.toString(),
                                   style: GoogleFonts.getFont(
                                     'Quicksand',
                                     color: Colors.black,
