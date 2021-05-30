@@ -45,100 +45,128 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     rowUsersRecordList = createDummyUsersRecord(count: 1);
                   }
                   final rowUsersRecord = rowUsersRecordList.first;
-                  return Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                width: 90,
-                                height: 90,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: CachedNetworkImage(
-                                  imageUrl: rowUsersRecord.photoUrl,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-                                child: Text(
-                                  rowUsersRecord.displayName,
-                                  style: GoogleFonts.getFont(
-                                    'Quicksand',
-                                    color: Color(0xFF455A64),
-                                    fontSize: 11,
+                  return Padding(
+                    padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Container(
+                                  width: 90,
+                                  height: 90,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: rowUsersRecord.photoUrl,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(28, 16, 0, 16),
-                            child: InkWell(
-                              onTap: () async {
-                                await Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditStatusPageWidget(),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+                                  child: Text(
+                                    rowUsersRecord.displayName,
+                                    style: GoogleFonts.getFont(
+                                      'Quicksand',
+                                      color: Color(0xFF455A64),
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                  (r) => false,
-                                );
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(1, 0, 1, 0),
-                                          child: Text(
-                                            rowUsersRecord.mask.toString(),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(28, 16, 0, 16),
+                              child: InkWell(
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EditStatusPageWidget(),
+                                    ),
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(1, 0, 1, 0),
+                                            child: Text(
+                                              rowUsersRecord.mask.toString(),
+                                              style: GoogleFonts.getFont(
+                                                'Quicksand',
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 6, 0, 0),
+                                            child: Text(
+                                              'Masks',
+                                              style: GoogleFonts.getFont(
+                                                'Quicksand',
+                                                color: Color(0xFF90A4AE),
+                                                fontSize: 11,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Text(
+                                            rowUsersRecord.alcohol.toString(),
                                             style: GoogleFonts.getFont(
                                               'Quicksand',
                                               color: Colors.black,
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 15,
+                                              fontSize: 16,
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 6, 0, 0),
-                                          child: Text(
-                                            'Masks',
-                                            style: GoogleFonts.getFont(
-                                              'Quicksand',
-                                              color: Color(0xFF90A4AE),
-                                              fontSize: 11,
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 6, 0, 0),
+                                            child: Text(
+                                              'Alcohol',
+                                              style: GoogleFonts.getFont(
+                                                'Quicksand',
+                                                color: Color(0xFF90A4AE),
+                                                fontSize: 11,
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      ],
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                                    child: Column(
+                                    Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Text(
-                                          rowUsersRecord.alcohol.toString(),
+                                          rowUsersRecord.food.toString(),
                                           style: GoogleFonts.getFont(
                                             'Quicksand',
                                             color: Colors.black,
@@ -150,7 +178,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           padding:
                                               EdgeInsets.fromLTRB(0, 6, 0, 0),
                                           child: Text(
-                                            'Alcohol',
+                                            'food',
                                             style: GoogleFonts.getFont(
                                               'Quicksand',
                                               color: Color(0xFF90A4AE),
@@ -159,41 +187,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           ),
                                         )
                                       ],
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        rowUsersRecord.food.toString(),
-                                        style: GoogleFonts.getFont(
-                                          'Quicksand',
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 6, 0, 0),
-                                        child: Text(
-                                          'food',
-                                          style: GoogleFonts.getFont(
-                                            'Quicksand',
-                                            color: Color(0xFF90A4AE),
-                                            fontSize: 11,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   );
                 },
               ),
@@ -201,7 +203,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 padding: EdgeInsets.fromLTRB(10, 16, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.max,
