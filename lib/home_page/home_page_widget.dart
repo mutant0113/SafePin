@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../edit_status_page/edit_status_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -29,43 +28,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(16, 15, 16, 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'FlutterFlow',
-                            style: GoogleFonts.getFont(
-                              'Quicksand',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 17,
-                            ),
-                          ),
-                          Text(
-                            '@flutterflow',
-                            style: GoogleFonts.getFont(
-                              'Quicksand',
-                              color: Color(0xFF1B5E20),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Icon(
-                      Icons.keyboard_control,
-                      color: Color(0xFF263238),
-                      size: 20,
-                    )
-                  ],
-                ),
-              ),
               StreamBuilder<List<UsersRecord>>(
                 stream: queryUsersRecord(
                   singleRecord: true,
@@ -87,133 +49,159 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Column(
+                      Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Container(
-                            width: 90,
-                            height: 90,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: CachedNetworkImage(
-                              imageUrl: rowUsersRecord.photoUrl,
-                              fit: BoxFit.fill,
-                            ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Container(
+                                width: 90,
+                                height: 90,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: rowUsersRecord.photoUrl,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+                                child: Text(
+                                  rowUsersRecord.displayName,
+                                  style: GoogleFonts.getFont(
+                                    'Quicksand',
+                                    color: Color(0xFF455A64),
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
-                          Text(
-                            rowUsersRecord.displayName,
-                            style: GoogleFonts.getFont(
-                              'Quicksand',
-                              color: Color(0xFF455A64),
-                              fontSize: 11,
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(28, 16, 0, 16),
+                            child: InkWell(
+                              onTap: () async {
+                                await Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditStatusPageWidget(),
+                                  ),
+                                  (r) => false,
+                                );
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(1, 0, 1, 0),
+                                          child: Text(
+                                            rowUsersRecord.mask.toString(),
+                                            style: GoogleFonts.getFont(
+                                              'Quicksand',
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 6, 0, 0),
+                                          child: Text(
+                                            'Masks',
+                                            style: GoogleFonts.getFont(
+                                              'Quicksand',
+                                              color: Color(0xFF90A4AE),
+                                              fontSize: 11,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          rowUsersRecord.alcohol.toString(),
+                                          style: GoogleFonts.getFont(
+                                            'Quicksand',
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 6, 0, 0),
+                                          child: Text(
+                                            'Alcohol',
+                                            style: GoogleFonts.getFont(
+                                              'Quicksand',
+                                              color: Color(0xFF90A4AE),
+                                              fontSize: 11,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        rowUsersRecord.food.toString(),
+                                        style: GoogleFonts.getFont(
+                                          'Quicksand',
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 6, 0, 0),
+                                        child: Text(
+                                          'food',
+                                          style: GoogleFonts.getFont(
+                                            'Quicksand',
+                                            color: Color(0xFF90A4AE),
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         ],
-                      ),
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => EditStatusPageWidget(),
-                            ),
-                            (r) => false,
-                          );
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  rowUsersRecord.mask.toString(),
-                                  style: GoogleFonts.getFont(
-                                    'Quicksand',
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
-                                  child: Text(
-                                    'Masks',
-                                    style: GoogleFonts.getFont(
-                                      'Quicksand',
-                                      color: Color(0xFF90A4AE),
-                                      fontSize: 11,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  rowUsersRecord.alcohol.toString(),
-                                  style: GoogleFonts.getFont(
-                                    'Quicksand',
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
-                                  child: Text(
-                                    'Alcohol',
-                                    style: GoogleFonts.getFont(
-                                      'Quicksand',
-                                      color: Color(0xFF90A4AE),
-                                      fontSize: 11,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  rowUsersRecord.food.toString(),
-                                  style: GoogleFonts.getFont(
-                                    'Quicksand',
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
-                                  child: Text(
-                                    'food',
-                                    style: GoogleFonts.getFont(
-                                      'Quicksand',
-                                      color: Color(0xFF90A4AE),
-                                      fontSize: 11,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
                       )
                     ],
                   );
                 },
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                padding: EdgeInsets.fromLTRB(10, 16, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Row(
                       mainAxisSize: MainAxisSize.max,
