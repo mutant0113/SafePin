@@ -1,3 +1,4 @@
+import '../edit_status_page/edit_status_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
@@ -26,20 +27,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 15, 0, 10),
+                padding: EdgeInsets.fromLTRB(16, 15, 16, 10),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    InkWell(
-                      onTap: () async {
-                        Navigator.pop(context);
-                      },
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        color: Color(0xFF263238),
-                      ),
-                    ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
                       child: Column(
@@ -71,99 +63,110 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 90,
-                    height: 90,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
+              InkWell(
+                onTap: () async {
+                  await Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditStatusPageWidget(),
                     ),
-                    child: Image.network(
-                      'http://storage.googleapis.com/flutterflow-io-6f20.appspot.com/flutterflow_assets/ff_temp_icon.png',
-                      fit: BoxFit.fill,
+                    (r) => false,
+                  );
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 90,
+                      height: 90,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.network(
+                        'http://storage.googleapis.com/flutterflow-io-6f20.appspot.com/flutterflow_assets/ff_temp_icon.png',
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        '60',
-                        style: GoogleFonts.getFont(
-                          'Quicksand',
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
-                        child: Text(
-                          'Masks',
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          '60',
                           style: GoogleFonts.getFont(
                             'Quicksand',
-                            color: Color(0xFF90A4AE),
-                            fontSize: 11,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 15,
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        '2',
-                        style: GoogleFonts.getFont(
-                          'Quicksand',
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
-                        child: Text(
-                          'Alcohol',
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+                          child: Text(
+                            'Masks',
+                            style: GoogleFonts.getFont(
+                              'Quicksand',
+                              color: Color(0xFF90A4AE),
+                              fontSize: 11,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          '2',
                           style: GoogleFonts.getFont(
                             'Quicksand',
-                            color: Color(0xFF90A4AE),
-                            fontSize: 11,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        '2 ',
-                        style: GoogleFonts.getFont(
-                          'Quicksand',
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
-                        child: Text(
-                          'food',
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+                          child: Text(
+                            'Alcohol',
+                            style: GoogleFonts.getFont(
+                              'Quicksand',
+                              color: Color(0xFF90A4AE),
+                              fontSize: 11,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          '2 ',
                           style: GoogleFonts.getFont(
                             'Quicksand',
-                            color: Color(0xFF90A4AE),
-                            fontSize: 11,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
                           ),
                         ),
-                      )
-                    ],
-                  )
-                ],
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+                          child: Text(
+                            'food',
+                            style: GoogleFonts.getFont(
+                              'Quicksand',
+                              color: Color(0xFF90A4AE),
+                              fontSize: 11,
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
