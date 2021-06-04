@@ -228,6 +228,7 @@ class _EditStatusPageWidgetState extends State<EditStatusPageWidget> {
 
                           await editStatusPageUsersRecord.reference
                               .update(usersRecordData);
+                          Navigator.pop(context);
                         },
                         text: 'Continue',
                         options: FFButtonOptions(
