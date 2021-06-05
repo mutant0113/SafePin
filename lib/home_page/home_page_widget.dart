@@ -2,6 +2,8 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../edit_status_page/edit_status_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_toggle_icon.dart';
+import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -458,17 +460,34 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          IconButton(
-                                            onPressed: () {
-                                              print('IconButton pressed ...');
+                                          ToggleIcon(
+                                            onPressed: () async {
+                                              final isResponsed =
+                                                  !listFriendPingsRecord
+                                                      .isResponsed;
+
+                                              final pingsRecordData =
+                                                  createPingsRecordData(
+                                                isResponsed: isResponsed,
+                                              );
+
+                                              await listFriendPingsRecord
+                                                  .reference
+                                                  .update(pingsRecordData);
                                             },
-                                            icon: Icon(
+                                            value: listFriendPingsRecord
+                                                .isResponsed,
+                                            onIcon: Icon(
                                               Icons.soap,
+                                              color: Colors.black,
+                                              size: 25,
+                                            ),
+                                            offIcon: Icon(
+                                              Icons.soap_outlined,
                                               color: FlutterFlowTheme
                                                   .secondaryColor,
-                                              size: 30,
+                                              size: 25,
                                             ),
-                                            iconSize: 30,
                                           )
                                         ],
                                       ),

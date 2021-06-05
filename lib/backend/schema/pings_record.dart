@@ -18,10 +18,6 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
   DocumentReference get friend;
 
   @nullable
-  @BuiltValueField(wireName: 'user_ping_status')
-  int get userPingStatus;
-
-  @nullable
   @BuiltValueField(wireName: 'friend_last_mask')
   int get friendLastMask;
 
@@ -64,11 +60,13 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
   Timestamp get createdTime;
 
   @nullable
+  bool get isResponsed;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(PingsRecordBuilder builder) => builder
-    ..userPingStatus = 0
     ..friendLastMask = 0
     ..friendLastAlcohol = 0
     ..friendLastFood = 0
@@ -77,7 +75,8 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
     ..email = ''
     ..displayName = ''
     ..photoUrl = ''
-    ..uid = '';
+    ..uid = ''
+    ..isResponsed = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('pings');
@@ -94,7 +93,6 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
 Map<String, dynamic> createPingsRecordData({
   DocumentReference user,
   DocumentReference friend,
-  int userPingStatus,
   int friendLastMask,
   int friendLastAlcohol,
   int friendLastFood,
@@ -106,13 +104,13 @@ Map<String, dynamic> createPingsRecordData({
   String photoUrl,
   String uid,
   Timestamp createdTime,
+  bool isResponsed,
 }) =>
     serializers.serializeWith(
         PingsRecord.serializer,
         PingsRecord((p) => p
           ..user = user
           ..friend = friend
-          ..userPingStatus = userPingStatus
           ..friendLastMask = friendLastMask
           ..friendLastAlcohol = friendLastAlcohol
           ..friendLastFood = friendLastFood
@@ -123,11 +121,11 @@ Map<String, dynamic> createPingsRecordData({
           ..displayName = displayName
           ..photoUrl = photoUrl
           ..uid = uid
-          ..createdTime = createdTime));
+          ..createdTime = createdTime
+          ..isResponsed = isResponsed));
 
 PingsRecord get dummyPingsRecord {
   final builder = PingsRecordBuilder()
-    ..userPingStatus = dummyInteger
     ..friendLastMask = dummyInteger
     ..friendLastAlcohol = dummyInteger
     ..friendLastFood = dummyInteger
@@ -138,7 +136,8 @@ PingsRecord get dummyPingsRecord {
     ..displayName = dummyString
     ..photoUrl = dummyImagePath
     ..uid = dummyString
-    ..createdTime = dummyTimestamp;
+    ..createdTime = dummyTimestamp
+    ..isResponsed = dummyBoolean;
   return builder.build();
 }
 
