@@ -42,24 +42,7 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
   String get friendPhotoUrl;
 
   @nullable
-  String get email;
-
-  @nullable
-  @BuiltValueField(wireName: 'display_name')
-  String get displayName;
-
-  @nullable
-  @BuiltValueField(wireName: 'photo_url')
-  String get photoUrl;
-
-  @nullable
-  String get uid;
-
-  @nullable
-  @BuiltValueField(wireName: 'created_time')
-  Timestamp get createdTime;
-
-  @nullable
+  @BuiltValueField(wireName: 'is_responsed')
   bool get isResponsed;
 
   @nullable
@@ -72,10 +55,6 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
     ..friendLastFood = 0
     ..friendName = ''
     ..friendPhotoUrl = ''
-    ..email = ''
-    ..displayName = ''
-    ..photoUrl = ''
-    ..uid = ''
     ..isResponsed = false;
 
   static CollectionReference get collection =>
@@ -99,11 +78,6 @@ Map<String, dynamic> createPingsRecordData({
   Timestamp updateTimestamp,
   String friendName,
   String friendPhotoUrl,
-  String email,
-  String displayName,
-  String photoUrl,
-  String uid,
-  Timestamp createdTime,
   bool isResponsed,
 }) =>
     serializers.serializeWith(
@@ -117,11 +91,6 @@ Map<String, dynamic> createPingsRecordData({
           ..updateTimestamp = updateTimestamp
           ..friendName = friendName
           ..friendPhotoUrl = friendPhotoUrl
-          ..email = email
-          ..displayName = displayName
-          ..photoUrl = photoUrl
-          ..uid = uid
-          ..createdTime = createdTime
           ..isResponsed = isResponsed));
 
 PingsRecord get dummyPingsRecord {
@@ -132,11 +101,6 @@ PingsRecord get dummyPingsRecord {
     ..updateTimestamp = dummyTimestamp
     ..friendName = dummyString
     ..friendPhotoUrl = dummyImagePath
-    ..email = dummyString
-    ..displayName = dummyString
-    ..photoUrl = dummyImagePath
-    ..uid = dummyString
-    ..createdTime = dummyTimestamp
     ..isResponsed = dummyBoolean;
   return builder.build();
 }

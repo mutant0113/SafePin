@@ -39,6 +39,10 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
   int get food;
 
   @nullable
+  @BuiltValueField(wireName: 'phone_number')
+  String get phoneNumber;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -49,7 +53,8 @@ abstract class UsersRecord implements Built<UsersRecord, UsersRecordBuilder> {
     ..uid = ''
     ..mask = 0
     ..alcohol = 0
-    ..food = 0;
+    ..food = 0
+    ..phoneNumber = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('users');
@@ -72,6 +77,7 @@ Map<String, dynamic> createUsersRecordData({
   int mask,
   int alcohol,
   int food,
+  String phoneNumber,
 }) =>
     serializers.serializeWith(
         UsersRecord.serializer,
@@ -83,7 +89,8 @@ Map<String, dynamic> createUsersRecordData({
           ..createdTime = createdTime
           ..mask = mask
           ..alcohol = alcohol
-          ..food = food));
+          ..food = food
+          ..phoneNumber = phoneNumber));
 
 UsersRecord get dummyUsersRecord {
   final builder = UsersRecordBuilder()
@@ -94,7 +101,8 @@ UsersRecord get dummyUsersRecord {
     ..createdTime = dummyTimestamp
     ..mask = dummyInteger
     ..alcohol = dummyInteger
-    ..food = dummyInteger;
+    ..food = dummyInteger
+    ..phoneNumber = dummyString;
   return builder.build();
 }
 

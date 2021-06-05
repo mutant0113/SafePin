@@ -479,7 +479,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 .isResponsed,
                                             onIcon: Icon(
                                               Icons.soap,
-                                              color: Colors.black,
+                                              color: FlutterFlowTheme
+                                                  .secondaryColor,
                                               size: 25,
                                             ),
                                             offIcon: Icon(
