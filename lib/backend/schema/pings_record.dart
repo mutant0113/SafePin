@@ -42,8 +42,12 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
   String get friendPhotoUrl;
 
   @nullable
-  @BuiltValueField(wireName: 'is_responsed')
-  bool get isResponsed;
+  @BuiltValueField(wireName: 'is_pinged')
+  bool get isPinged;
+
+  @nullable
+  @BuiltValueField(wireName: 'has_pinged_friend')
+  bool get hasPingedFriend;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -55,7 +59,8 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
     ..friendLastFood = 0
     ..friendName = ''
     ..friendPhotoUrl = ''
-    ..isResponsed = false;
+    ..isPinged = false
+    ..hasPingedFriend = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('pings');
@@ -78,7 +83,8 @@ Map<String, dynamic> createPingsRecordData({
   Timestamp updateTimestamp,
   String friendName,
   String friendPhotoUrl,
-  bool isResponsed,
+  bool isPinged,
+  bool hasPingedFriend,
 }) =>
     serializers.serializeWith(
         PingsRecord.serializer,
@@ -91,7 +97,8 @@ Map<String, dynamic> createPingsRecordData({
           ..updateTimestamp = updateTimestamp
           ..friendName = friendName
           ..friendPhotoUrl = friendPhotoUrl
-          ..isResponsed = isResponsed));
+          ..isPinged = isPinged
+          ..hasPingedFriend = hasPingedFriend));
 
 PingsRecord get dummyPingsRecord {
   final builder = PingsRecordBuilder()
@@ -101,7 +108,8 @@ PingsRecord get dummyPingsRecord {
     ..updateTimestamp = dummyTimestamp
     ..friendName = dummyString
     ..friendPhotoUrl = dummyImagePath
-    ..isResponsed = dummyBoolean;
+    ..isPinged = dummyBoolean
+    ..hasPingedFriend = dummyBoolean;
   return builder.build();
 }
 

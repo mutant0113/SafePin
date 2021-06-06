@@ -124,7 +124,7 @@ class _LoginPageCopyWidgetState extends State<LoginPageCopyWidget> {
                                             ),
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Colors.transparent,
+                                                color: Color(0x00000000),
                                                 width: 1,
                                               ),
                                               borderRadius:
@@ -135,7 +135,7 @@ class _LoginPageCopyWidgetState extends State<LoginPageCopyWidget> {
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
-                                                color: Colors.transparent,
+                                                color: Color(0x00000000),
                                                 width: 1,
                                               ),
                                               borderRadius:
@@ -190,7 +190,7 @@ class _LoginPageCopyWidgetState extends State<LoginPageCopyWidget> {
                                           ),
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -201,7 +201,7 @@ class _LoginPageCopyWidgetState extends State<LoginPageCopyWidget> {
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -255,7 +255,7 @@ class _LoginPageCopyWidgetState extends State<LoginPageCopyWidget> {
                                           ),
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -266,7 +266,7 @@ class _LoginPageCopyWidgetState extends State<LoginPageCopyWidget> {
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:

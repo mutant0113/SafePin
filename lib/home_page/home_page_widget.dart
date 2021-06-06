@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -257,250 +258,462 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 height: 10,
                 decoration: BoxDecoration(),
               ),
-              Divider(
-                height: 2,
-                thickness: 2,
-                color: Color(0xFF6A6A6A),
-              ),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(16, 12, 0, 12),
-                            child: Text(
-                              'Recent Pings',
-                              style: FlutterFlowTheme.bodyText2.override(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+                  child: DefaultTabController(
+                    length: 2,
+                    initialIndex: 0,
+                    child: Column(
+                      children: [
+                        TabBar(
+                          labelColor: FlutterFlowTheme.primaryColor,
+                          indicatorColor: FlutterFlowTheme.secondaryColor,
+                          tabs: [
+                            Tab(
+                              text: 'Recent Pings',
+                              icon: Icon(
+                                Icons.comment_rounded,
                               ),
                             ),
-                          )
-                        ],
-                      ),
-                      StreamBuilder<List<PingsRecord>>(
-                        stream: queryPingsRecord(
-                          queryBuilder: (pingsRecord) => pingsRecord
-                              .where('user', isEqualTo: currentUserReference)
-                              .orderBy('update_timestamp', descending: true),
+                            Tab(
+                              text: 'Friends',
+                              icon: Icon(
+                                Icons.people_rounded,
+                              ),
+                            )
+                          ],
                         ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(child: CircularProgressIndicator());
-                          }
-                          List<PingsRecord> listFriendPingsRecordList =
-                              snapshot.data;
-                          // Customize what your widget looks like with no query results.
-                          if (snapshot.data.isEmpty) {
-                            // return Container();
-                            // For now, we'll just include some dummy data.
-                            listFriendPingsRecordList =
-                                createDummyPingsRecord(count: 4);
-                          }
-                          return Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children:
-                                List.generate(listFriendPingsRecordList.length,
-                                    (listFriendIndex) {
-                              final listFriendPingsRecord =
-                                  listFriendPingsRecordList[listFriendIndex];
-                              return Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.tertiaryColor,
-                                  border: Border.all(
-                                    color: Color(0xFFC8CED5),
-                                    width: 1,
-                                  ),
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              StreamBuilder<List<PingsRecord>>(
+                                stream: queryPingsRecord(
+                                  queryBuilder: (pingsRecord) => pingsRecord
+                                      .where('user',
+                                          isEqualTo: currentUserReference)
+                                      .orderBy('update_timestamp',
+                                          descending: true),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 60,
-                                            height: 60,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              listFriendPingsRecord
-                                                  .friendPhotoUrl,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            listFriendPingsRecord.friendName,
-                                            style: FlutterFlowTheme.subtitle1
-                                                .override(
-                                              fontFamily: 'Poppins',
-                                              color: Color(0xFF15212B),
-                                            ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                        child: CircularProgressIndicator());
+                                  }
+                                  List<PingsRecord> listFriendPingsRecordList =
+                                      snapshot.data;
+                                  // Customize what your widget looks like with no query results.
+                                  if (snapshot.data.isEmpty) {
+                                    // return Container();
+                                    // For now, we'll just include some dummy data.
+                                    listFriendPingsRecordList =
+                                        createDummyPingsRecord(count: 4);
+                                  }
+                                  return Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: List.generate(
+                                        listFriendPingsRecordList.length,
+                                        (listFriendIndex) {
+                                      final listFriendPingsRecord =
+                                          listFriendPingsRecordList[
+                                              listFriendIndex];
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.tertiaryColor,
+                                          border: Border.all(
+                                            color: Color(0xFFC8CED5),
+                                            width: 1,
                                           ),
-                                          Expanded(
-                                            child: Padding(
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
                                               padding: EdgeInsets.fromLTRB(
-                                                  0, 4, 4, 0),
-                                              child: Text(
-                                                listFriendPingsRecord
-                                                    .updateTimestamp
-                                                    .toString(),
-                                                style: FlutterFlowTheme
-                                                    .bodyText2
-                                                    .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: FlutterFlowTheme
-                                                      .primaryColor,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                  8, 0, 8, 0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    width: 60,
+                                                    height: 60,
+                                                    clipBehavior:
+                                                        Clip.antiAlias,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Image.network(
+                                                      listFriendPingsRecord
+                                                          .friendPhotoUrl,
+                                                    ),
+                                                  )
+                                                ],
                                               ),
                                             ),
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0, 4, 4, 0),
-                                                  child: Text(
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
                                                     listFriendPingsRecord
-                                                        .friendLastMask
-                                                        .toString(),
+                                                        .friendName,
                                                     style: FlutterFlowTheme
-                                                        .bodyText2
+                                                        .subtitle1
                                                         .override(
                                                       fontFamily: 'Poppins',
-                                                      color: FlutterFlowTheme
-                                                          .primaryColor,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                      color: Color(0xFF15212B),
                                                     ),
                                                   ),
-                                                ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                                  0, 4, 4, 0),
+                                                          child: Text(
+                                                            'How are you doing?',
+                                                            style:
+                                                                FlutterFlowTheme
+                                                                    .bodyText2
+                                                                    .override(
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              color: FlutterFlowTheme
+                                                                  .primaryColor,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
                                               ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0, 4, 4, 0),
-                                                  child: Text(
-                                                    listFriendPingsRecord
-                                                        .friendLastAlcohol
-                                                        .toString(),
-                                                    style: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: FlutterFlowTheme
-                                                          .primaryColor,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0, 4, 4, 0),
-                                                  child: Text(
-                                                    listFriendPingsRecord
-                                                        .friendLastFood
-                                                        .toString(),
-                                                    style: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: FlutterFlowTheme
-                                                          .primaryColor,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 8, 0),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          ToggleIcon(
-                                            onPressed: () async {
-                                              final isResponsed =
-                                                  !listFriendPingsRecord
-                                                      .isResponsed;
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 0, 8, 0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  IconButton(
+                                                    onPressed: () async {
+                                                      final isPinged = false;
 
-                                              final pingsRecordData =
-                                                  createPingsRecordData(
-                                                isResponsed: isResponsed,
-                                              );
+                                                      final pingsRecordData =
+                                                          createPingsRecordData(
+                                                        isPinged: isPinged,
+                                                      );
 
-                                              await listFriendPingsRecord
-                                                  .reference
-                                                  .update(pingsRecordData);
-                                            },
-                                            value: listFriendPingsRecord
-                                                .isResponsed,
-                                            onIcon: Icon(
-                                              Icons.soap,
-                                              color: FlutterFlowTheme
-                                                  .secondaryColor,
-                                              size: 25,
-                                            ),
-                                            offIcon: Icon(
-                                              Icons.soap_outlined,
-                                              color: FlutterFlowTheme
-                                                  .secondaryColor,
-                                              size: 25,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                                      await listFriendPingsRecord
+                                                          .reference
+                                                          .update(
+                                                              pingsRecordData);
+                                                      final email = '';
+
+                                                      final usersRecordData =
+                                                          createUsersRecordData(
+                                                        email: email,
+                                                      );
+
+                                                      await listFriendPingsRecord
+                                                          .friend
+                                                          .update(
+                                                              usersRecordData);
+                                                    },
+                                                    icon: Icon(
+                                                      Icons.reply,
+                                                      color: FlutterFlowTheme
+                                                          .primaryColor,
+                                                      size: 30,
+                                                    ),
+                                                    iconSize: 30,
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                  );
+                                },
+                              ),
+                              StreamBuilder<List<PingsRecord>>(
+                                stream: queryPingsRecord(
+                                  queryBuilder: (pingsRecord) => pingsRecord
+                                      .where('user',
+                                          isEqualTo: currentUserReference)
+                                      .orderBy('update_timestamp',
+                                          descending: true),
                                 ),
-                              );
-                            }),
-                          );
-                        },
-                      )
-                    ],
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                        child: CircularProgressIndicator());
+                                  }
+                                  List<PingsRecord> listFriendPingsRecordList =
+                                      snapshot.data;
+                                  // Customize what your widget looks like with no query results.
+                                  if (snapshot.data.isEmpty) {
+                                    // return Container();
+                                    // For now, we'll just include some dummy data.
+                                    listFriendPingsRecordList =
+                                        createDummyPingsRecord(count: 4);
+                                  }
+                                  return Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: List.generate(
+                                        listFriendPingsRecordList.length,
+                                        (listFriendIndex) {
+                                      final listFriendPingsRecord =
+                                          listFriendPingsRecordList[
+                                              listFriendIndex];
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.tertiaryColor,
+                                          border: Border.all(
+                                            color: Color(0xFFC8CED5),
+                                            width: 1,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  8, 0, 8, 0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                    width: 60,
+                                                    height: 60,
+                                                    clipBehavior:
+                                                        Clip.antiAlias,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Image.network(
+                                                      listFriendPingsRecord
+                                                          .friendPhotoUrl,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    listFriendPingsRecord
+                                                        .friendName,
+                                                    style: FlutterFlowTheme
+                                                        .subtitle1
+                                                        .override(
+                                                      fontFamily: 'Poppins',
+                                                      color: Color(0xFF15212B),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              0, 4, 4, 0),
+                                                      child: Text(
+                                                        dateTimeFormat(
+                                                            'relative',
+                                                            listFriendPingsRecord
+                                                                .updateTimestamp
+                                                                .toDate()),
+                                                        style: FlutterFlowTheme
+                                                            .bodyText2
+                                                            .override(
+                                                          fontFamily: 'Poppins',
+                                                          color:
+                                                              FlutterFlowTheme
+                                                                  .primaryColor,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                                  0, 4, 4, 0),
+                                                          child: Text(
+                                                            listFriendPingsRecord
+                                                                .friendLastMask
+                                                                .toString(),
+                                                            style:
+                                                                FlutterFlowTheme
+                                                                    .bodyText2
+                                                                    .override(
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              color: FlutterFlowTheme
+                                                                  .primaryColor,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                                  0, 4, 4, 0),
+                                                          child: Text(
+                                                            listFriendPingsRecord
+                                                                .friendLastAlcohol
+                                                                .toString(),
+                                                            style:
+                                                                FlutterFlowTheme
+                                                                    .bodyText2
+                                                                    .override(
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              color: FlutterFlowTheme
+                                                                  .primaryColor,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        child: Padding(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                                  0, 4, 4, 0),
+                                                          child: Text(
+                                                            listFriendPingsRecord
+                                                                .friendLastFood
+                                                                .toString(),
+                                                            style:
+                                                                FlutterFlowTheme
+                                                                    .bodyText2
+                                                                    .override(
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              color: FlutterFlowTheme
+                                                                  .primaryColor,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  0, 0, 8, 0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  ToggleIcon(
+                                                    onPressed: () async {
+                                                      final hasPingedFriend =
+                                                          !listFriendPingsRecord
+                                                              .hasPingedFriend;
+
+                                                      final pingsRecordData =
+                                                          createPingsRecordData(
+                                                        hasPingedFriend:
+                                                            hasPingedFriend,
+                                                      );
+
+                                                      await listFriendPingsRecord
+                                                          .reference
+                                                          .update(
+                                                              pingsRecordData);
+                                                    },
+                                                    value: listFriendPingsRecord
+                                                        .hasPingedFriend,
+                                                    onIcon: Icon(
+                                                      Icons.soap_outlined,
+                                                      color: FlutterFlowTheme
+                                                          .secondaryColor,
+                                                      size: 25,
+                                                    ),
+                                                    offIcon: Icon(
+                                                      Icons.soap_rounded,
+                                                      color: FlutterFlowTheme
+                                                          .secondaryColor,
+                                                      size: 25,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                  );
+                                },
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               )
