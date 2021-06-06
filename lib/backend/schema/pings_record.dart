@@ -12,22 +12,10 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
   static Serializer<PingsRecord> get serializer => _$pingsRecordSerializer;
 
   @nullable
-  DocumentReference get user;
+  DocumentReference get sender;
 
   @nullable
-  DocumentReference get friend;
-
-  @nullable
-  @BuiltValueField(wireName: 'friend_last_mask')
-  int get friendLastMask;
-
-  @nullable
-  @BuiltValueField(wireName: 'friend_last_alcohol')
-  int get friendLastAlcohol;
-
-  @nullable
-  @BuiltValueField(wireName: 'friend_last_food')
-  int get friendLastFood;
+  DocumentReference get receiver;
 
   @nullable
   @BuiltValueField(wireName: 'update_timestamp')
@@ -42,25 +30,12 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
   String get friendPhotoUrl;
 
   @nullable
-  @BuiltValueField(wireName: 'is_pinged')
-  bool get isPinged;
-
-  @nullable
-  @BuiltValueField(wireName: 'has_pinged_friend')
-  bool get hasPingedFriend;
-
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(PingsRecordBuilder builder) => builder
-    ..friendLastMask = 0
-    ..friendLastAlcohol = 0
-    ..friendLastFood = 0
     ..friendName = ''
-    ..friendPhotoUrl = ''
-    ..isPinged = false
-    ..hasPingedFriend = false;
+    ..friendPhotoUrl = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('pings');
@@ -75,41 +50,26 @@ abstract class PingsRecord implements Built<PingsRecord, PingsRecordBuilder> {
 }
 
 Map<String, dynamic> createPingsRecordData({
-  DocumentReference user,
-  DocumentReference friend,
-  int friendLastMask,
-  int friendLastAlcohol,
-  int friendLastFood,
+  DocumentReference sender,
+  DocumentReference receiver,
   Timestamp updateTimestamp,
   String friendName,
   String friendPhotoUrl,
-  bool isPinged,
-  bool hasPingedFriend,
 }) =>
     serializers.serializeWith(
         PingsRecord.serializer,
         PingsRecord((p) => p
-          ..user = user
-          ..friend = friend
-          ..friendLastMask = friendLastMask
-          ..friendLastAlcohol = friendLastAlcohol
-          ..friendLastFood = friendLastFood
+          ..sender = sender
+          ..receiver = receiver
           ..updateTimestamp = updateTimestamp
           ..friendName = friendName
-          ..friendPhotoUrl = friendPhotoUrl
-          ..isPinged = isPinged
-          ..hasPingedFriend = hasPingedFriend));
+          ..friendPhotoUrl = friendPhotoUrl));
 
 PingsRecord get dummyPingsRecord {
   final builder = PingsRecordBuilder()
-    ..friendLastMask = dummyInteger
-    ..friendLastAlcohol = dummyInteger
-    ..friendLastFood = dummyInteger
     ..updateTimestamp = dummyTimestamp
     ..friendName = dummyString
-    ..friendPhotoUrl = dummyImagePath
-    ..isPinged = dummyBoolean
-    ..hasPingedFriend = dummyBoolean;
+    ..friendPhotoUrl = dummyImagePath;
   return builder.build();
 }
 

@@ -5,11 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
+import 'schema/status_record.dart';
 import 'schema/pings_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
 export 'schema/users_record.dart';
+export 'schema/status_record.dart';
 export 'schema/pings_record.dart';
 
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -17,6 +19,13 @@ Stream<List<UsersRecord>> queryUsersRecord(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollection(UsersRecord.collection, UsersRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Stream<List<StatusRecord>> queryStatusRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(StatusRecord.collection, StatusRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<PingsRecord>> queryPingsRecord(
