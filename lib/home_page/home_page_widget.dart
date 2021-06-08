@@ -4,6 +4,7 @@ import '../edit_status_page/edit_status_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../login_page/login_page_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -228,10 +229,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ],
                         ),
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            await signOut();
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPageWidget(),
+                              ),
+                              (r) => false,
+                            );
                           },
-                          text: 'Add friend',
+                          text: 'Logout',
                           options: FFButtonOptions(
                             width: 110,
                             height: 30,
