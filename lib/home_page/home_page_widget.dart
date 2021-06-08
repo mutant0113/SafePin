@@ -22,23 +22,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<UsersRecord>>(
-      stream: queryUsersRecord(
-        singleRecord: true,
-      ),
+    return StreamBuilder<UsersRecord>(
+      stream: UsersRecord.getDocument(currentUserReference),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
         }
-        List<UsersRecord> homePageUsersRecordList = snapshot.data;
-        // Customize what your widget looks like with no query results.
-        if (snapshot.data.isEmpty) {
-          // return Container();
-          // For now, we'll just include some dummy data.
-          homePageUsersRecordList = createDummyUsersRecord(count: 1);
-        }
-        final homePageUsersRecord = homePageUsersRecordList.first;
+        final homePageUsersRecord = snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
