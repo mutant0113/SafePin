@@ -614,63 +614,101 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        listFriendStatusRecord
-                                                            .friendName,
-                                                        style: FlutterFlowTheme
-                                                            .subtitle1
-                                                            .override(
-                                                          fontFamily: 'Poppins',
-                                                          color:
-                                                              Color(0xFF15212B),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            16, 0, 0, 0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          listFriendStatusRecord
+                                                              .friendName,
+                                                          style:
+                                                              FlutterFlowTheme
+                                                                  .subtitle1
+                                                                  .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                            color: Color(
+                                                                0xFF15212B),
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  0, 4, 4, 0),
-                                                          child: Text(
-                                                            dateTimeFormat(
-                                                                'relative',
-                                                                listFriendStatusRecord
-                                                                    .updateTimestamp
-                                                                    .toDate()),
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Poppins',
-                                                              color: FlutterFlowTheme
-                                                                  .primaryColor,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                    0, 4, 4, 0),
+                                                            child: Text(
+                                                              dateTimeFormat(
+                                                                  'relative',
+                                                                  listFriendStatusRecord
+                                                                      .updateTimestamp
+                                                                      .toDate()),
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                color: FlutterFlowTheme
+                                                                    .primaryColor,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Expanded(
-                                                            child: Align(
-                                                              alignment:
-                                                                  Alignment(
-                                                                      0, 0),
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Expanded(
+                                                              child: Align(
+                                                                alignment:
+                                                                    Alignment(
+                                                                        0, 0),
+                                                                child: Padding(
+                                                                  padding: EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0,
+                                                                          4,
+                                                                          4,
+                                                                          0),
+                                                                  child: Text(
+                                                                    listFriendStatusRecord
+                                                                        .friendLastMask
+                                                                        .toString(),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: FlutterFlowTheme
+                                                                        .bodyText2
+                                                                        .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                      color: FlutterFlowTheme
+                                                                          .primaryColor,
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
                                                               child: Padding(
                                                                 padding:
                                                                     EdgeInsets
@@ -681,7 +719,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                             0),
                                                                 child: Text(
                                                                   listFriendStatusRecord
-                                                                      .friendLastMask
+                                                                      .friendLastAlcohol
                                                                       .toString(),
                                                                   textAlign:
                                                                       TextAlign
@@ -702,72 +740,42 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .fromLTRB(
-                                                                          0,
-                                                                          4,
-                                                                          4,
-                                                                          0),
-                                                              child: Text(
-                                                                listFriendStatusRecord
-                                                                    .friendLastAlcohol
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  color: FlutterFlowTheme
-                                                                      .primaryColor,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
+                                                            Expanded(
+                                                              child: Padding(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .fromLTRB(
+                                                                            0,
+                                                                            4,
+                                                                            4,
+                                                                            0),
+                                                                child: Text(
+                                                                  listFriendStatusRecord
+                                                                      .friendLastFood
+                                                                      .toString(),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .center,
+                                                                  style: FlutterFlowTheme
+                                                                      .bodyText2
+                                                                      .override(
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                    color: FlutterFlowTheme
+                                                                        .primaryColor,
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .fromLTRB(
-                                                                          0,
-                                                                          4,
-                                                                          4,
-                                                                          0),
-                                                              child: Text(
-                                                                listFriendStatusRecord
-                                                                    .friendLastFood
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .center,
-                                                                style: FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  color: FlutterFlowTheme
-                                                                      .primaryColor,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      )
-                                                    ],
+                                                            )
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                                 Padding(
