@@ -475,37 +475,68 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           MainAxisSize.min,
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .center,
+                                                              .start,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
-                                                          listViewStatusRecord
-                                                              .friendName,
-                                                          style:
-                                                              FlutterFlowTheme
-                                                                  .bodyText1
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          dateTimeFormat(
-                                                              'relative',
-                                                              listViewStatusRecord
-                                                                  .updateTimestamp
-                                                                  .toDate()),
-                                                          style:
-                                                              FlutterFlowTheme
-                                                                  .bodyText2
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                          ),
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Text(
+                                                              dateTimeFormat(
+                                                                  'relative',
+                                                                  listViewStatusRecord
+                                                                      .updateTimestamp
+                                                                      .toDate()),
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                fontSize: 10,
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0,
+                                                                          0,
+                                                                          16,
+                                                                          0),
+                                                              child: Text(
+                                                                listViewStatusRecord
+                                                                    .friendName,
+                                                                style: FlutterFlowTheme
+                                                                    .bodyText1
+                                                                    .override(
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              dateTimeFormat(
+                                                                  'relative',
+                                                                  listViewStatusRecord
+                                                                      .updateTimestamp
+                                                                      .toDate()),
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                fontSize: 10,
+                                                              ),
+                                                            )
+                                                          ],
                                                         ),
                                                         Column(
                                                           mainAxisSize:
@@ -526,6 +557,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       .override(
                                                                     fontFamily:
                                                                         'Poppins',
+                                                                    fontSize:
+                                                                        10,
                                                                   ),
                                                                 ),
                                                                 Padding(
@@ -564,6 +597,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       .override(
                                                                     fontFamily:
                                                                         'Poppins',
+                                                                    fontSize:
+                                                                        10,
                                                                   ),
                                                                 ),
                                                                 Padding(
@@ -602,6 +637,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                       .override(
                                                                     fontFamily:
                                                                         'Poppins',
+                                                                    fontSize:
+                                                                        10,
                                                                   ),
                                                                 ),
                                                                 Padding(
