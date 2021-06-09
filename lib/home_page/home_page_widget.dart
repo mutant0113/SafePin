@@ -670,18 +670,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     onTap: () async {
                                                       final receiver =
                                                           listViewStatusRecord
-                                                              .user;
-                                                      final sender =
-                                                          listViewStatusRecord
                                                               .friend;
+                                                      final sender =
+                                                          currentUserReference;
                                                       final updateTimestamp =
                                                           getCurrentTimestamp;
                                                       final friendName =
-                                                          listViewStatusRecord
-                                                              .friendName;
+                                                          currentUserDisplayName;
                                                       final friendPhotoUrl =
-                                                          listViewStatusRecord
-                                                              .friendPhotoUrl;
+                                                          currentUserPhoto;
 
                                                       final pingsRecordData =
                                                           createPingsRecordData(
