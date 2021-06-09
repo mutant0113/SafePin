@@ -472,7 +472,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             16, 1, 0, 0),
                                                     child: Column(
                                                       mainAxisSize:
-                                                          MainAxisSize.max,
+                                                          MainAxisSize.min,
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .center,
@@ -507,54 +507,126 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 'Poppins',
                                                           ),
                                                         ),
-                                                        Row(
+                                                        Column(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
-                                                            Text(
-                                                              listViewStatusRecord
-                                                                  .friendLastMask
-                                                                  .toString(),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style:
-                                                                  FlutterFlowTheme
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  'Mask: ',
+                                                                  style: FlutterFlowTheme
                                                                       .bodyText1
                                                                       .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                              ),
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0,
+                                                                          0,
+                                                                          8,
+                                                                          0),
+                                                                  child: Text(
+                                                                    listViewStatusRecord
+                                                                        .friendLastMask
+                                                                        .toString(),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: FlutterFlowTheme
+                                                                        .bodyText1
+                                                                        .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ],
                                                             ),
-                                                            Text(
-                                                              listViewStatusRecord
-                                                                  .friendLastAlcohol
-                                                                  .toString(),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style:
-                                                                  FlutterFlowTheme
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  'Alcohol: ',
+                                                                  style: FlutterFlowTheme
                                                                       .bodyText1
                                                                       .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                              ),
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0,
+                                                                          0,
+                                                                          8,
+                                                                          0),
+                                                                  child: Text(
+                                                                    listViewStatusRecord
+                                                                        .friendLastAlcohol
+                                                                        .toString(),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: FlutterFlowTheme
+                                                                        .bodyText1
+                                                                        .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ],
                                                             ),
-                                                            Text(
-                                                              listViewStatusRecord
-                                                                  .friendLastFood
-                                                                  .toString(),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                              style:
-                                                                  FlutterFlowTheme
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Text(
+                                                                  'Food: ',
+                                                                  style: FlutterFlowTheme
                                                                       .bodyText1
                                                                       .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                              ),
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .fromLTRB(
+                                                                          0,
+                                                                          0,
+                                                                          8,
+                                                                          0),
+                                                                  child: Text(
+                                                                    listViewStatusRecord
+                                                                        .friendLastFood
+                                                                        .toString(),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: FlutterFlowTheme
+                                                                        .bodyText1
+                                                                        .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              ],
                                                             )
                                                           ],
                                                         )
