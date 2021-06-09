@@ -419,76 +419,57 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             child: CircularProgressIndicator());
                                       }
                                       List<StatusRecord>
-                                          listFriendStatusRecordList =
+                                          listViewStatusRecordList =
                                           snapshot.data;
                                       // Customize what your widget looks like with no query results.
                                       if (snapshot.data.isEmpty) {
                                         // return Container();
                                         // For now, we'll just include some dummy data.
-                                        listFriendStatusRecordList =
+                                        listViewStatusRecordList =
                                             createDummyStatusRecord(count: 4);
                                       }
-                                      return Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: List.generate(
-                                            listFriendStatusRecordList.length,
-                                            (listFriendIndex) {
-                                          final listFriendStatusRecord =
-                                              listFriendStatusRecordList[
-                                                  listFriendIndex];
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 100,
-                                            decoration: BoxDecoration(
-                                              color: FlutterFlowTheme
-                                                  .tertiaryColor,
-                                              border: Border.all(
-                                                color: Color(0xFFC8CED5),
-                                                width: 1,
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewStatusRecordList.length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewStatusRecord =
+                                              listViewStatusRecordList[
+                                                  listViewIndex];
+                                          return Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                16, 0, 16, 1),
+                                            child: Container(
+                                              width: 100,
+                                              height: 100,
+                                              decoration: BoxDecoration(
+                                                color: FlutterFlowTheme
+                                                    .tertiaryColor,
                                               ),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      8, 0, 8, 0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Container(
-                                                        width: 60,
-                                                        height: 60,
-                                                        clipBehavior:
-                                                            Clip.antiAlias,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        child: Image.network(
-                                                          listFriendStatusRecord
-                                                              .friendPhotoUrl,
-                                                        ),
-                                                      )
-                                                    ],
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Container(
+                                                    width: 60,
+                                                    height: 60,
+                                                    clipBehavior:
+                                                        Clip.antiAlias,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Image.network(
+                                                      listViewStatusRecord
+                                                          .friendPhotoUrl,
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  child: Padding(
+                                                  Padding(
                                                     padding:
                                                         EdgeInsets.fromLTRB(
-                                                            16, 0, 0, 0),
+                                                            16, 1, 0, 0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -500,147 +481,79 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          listFriendStatusRecord
+                                                          listViewStatusRecord
                                                               .friendName,
                                                           style:
                                                               FlutterFlowTheme
-                                                                  .subtitle1
+                                                                  .bodyText1
                                                                   .override(
                                                             fontFamily:
                                                                 'Poppins',
-                                                            color: Color(
-                                                                0xFF15212B),
+                                                            fontWeight:
+                                                                FontWeight.w500,
                                                           ),
                                                         ),
-                                                        Expanded(
-                                                          child: Padding(
-                                                            padding: EdgeInsets
-                                                                .fromLTRB(
-                                                                    0, 4, 4, 0),
-                                                            child: Text(
-                                                              dateTimeFormat(
-                                                                  'relative',
-                                                                  listFriendStatusRecord
-                                                                      .updateTimestamp
-                                                                      .toDate()),
-                                                              style:
-                                                                  FlutterFlowTheme
-                                                                      .bodyText2
-                                                                      .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: FlutterFlowTheme
-                                                                    .primaryColor,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                              ),
-                                                            ),
+                                                        Text(
+                                                          dateTimeFormat(
+                                                              'relative',
+                                                              listViewStatusRecord
+                                                                  .updateTimestamp
+                                                                  .toDate()),
+                                                          style:
+                                                              FlutterFlowTheme
+                                                                  .bodyText2
+                                                                  .override(
+                                                            fontFamily:
+                                                                'Poppins',
                                                           ),
                                                         ),
                                                         Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Expanded(
-                                                              child: Align(
-                                                                alignment:
-                                                                    Alignment(
-                                                                        0, 0),
-                                                                child: Padding(
-                                                                  padding: EdgeInsets
-                                                                      .fromLTRB(
-                                                                          0,
-                                                                          4,
-                                                                          4,
-                                                                          0),
-                                                                  child: Text(
-                                                                    listFriendStatusRecord
-                                                                        .friendLastMask
-                                                                        .toString(),
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .center,
-                                                                    style: FlutterFlowTheme
-                                                                        .bodyText2
-                                                                        .override(
-                                                                      fontFamily:
-                                                                          'Poppins',
-                                                                      color: FlutterFlowTheme
-                                                                          .primaryColor,
-                                                                      fontSize:
-                                                                          12,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                    ),
-                                                                  ),
-                                                                ),
+                                                            Text(
+                                                              listViewStatusRecord
+                                                                  .friendLastMask
+                                                                  .toString(),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText1
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Poppins',
                                                               ),
                                                             ),
-                                                            Expanded(
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .fromLTRB(
-                                                                            0,
-                                                                            4,
-                                                                            4,
-                                                                            0),
-                                                                child: Text(
-                                                                  listFriendStatusRecord
-                                                                      .friendLastAlcohol
-                                                                      .toString(),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: FlutterFlowTheme
-                                                                      .bodyText2
+                                                            Text(
+                                                              listViewStatusRecord
+                                                                  .friendLastAlcohol
+                                                                  .toString(),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText1
                                                                       .override(
-                                                                    fontFamily:
-                                                                        'Poppins',
-                                                                    color: FlutterFlowTheme
-                                                                        .primaryColor,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                  ),
-                                                                ),
+                                                                fontFamily:
+                                                                    'Poppins',
                                                               ),
                                                             ),
-                                                            Expanded(
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .fromLTRB(
-                                                                            0,
-                                                                            4,
-                                                                            4,
-                                                                            0),
-                                                                child: Text(
-                                                                  listFriendStatusRecord
-                                                                      .friendLastFood
-                                                                      .toString(),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: FlutterFlowTheme
-                                                                      .bodyText2
+                                                            Text(
+                                                              listViewStatusRecord
+                                                                  .friendLastFood
+                                                                  .toString(),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText1
                                                                       .override(
-                                                                    fontFamily:
-                                                                        'Poppins',
-                                                                    color: FlutterFlowTheme
-                                                                        .primaryColor,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                  ),
-                                                                ),
+                                                                fontFamily:
+                                                                    'Poppins',
                                                               ),
                                                             )
                                                           ],
@@ -648,91 +561,51 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       ],
                                                     ),
                                                   ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0, 0, 8, 0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      StreamBuilder<
-                                                          List<PingsRecord>>(
-                                                        stream:
-                                                            queryPingsRecord(
-                                                          singleRecord: true,
-                                                        ),
-                                                        builder: (context,
-                                                            snapshot) {
-                                                          // Customize what your widget looks like when it's loading.
-                                                          if (!snapshot
-                                                              .hasData) {
-                                                            return Center(
-                                                                child:
-                                                                    CircularProgressIndicator());
-                                                          }
-                                                          List<PingsRecord>
-                                                              iconButtonPingsRecordList =
-                                                              snapshot.data;
-                                                          // Customize what your widget looks like with no query results.
-                                                          if (snapshot
-                                                              .data.isEmpty) {
-                                                            // return Container();
-                                                            // For now, we'll just include some dummy data.
-                                                            iconButtonPingsRecordList =
-                                                                createDummyPingsRecord(
-                                                                    count: 1);
-                                                          }
-                                                          final iconButtonPingsRecord =
-                                                              iconButtonPingsRecordList
-                                                                  .first;
-                                                          return IconButton(
-                                                            onPressed:
-                                                                () async {
-                                                              final sender =
-                                                                  listFriendStatusRecord
-                                                                      .user;
-                                                              final receiver =
-                                                                  listFriendStatusRecord
-                                                                      .friend;
-                                                              final updateTimestamp =
-                                                                  getCurrentTimestamp;
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      final receiver =
+                                                          listViewStatusRecord
+                                                              .user;
+                                                      final sender =
+                                                          listViewStatusRecord
+                                                              .friend;
+                                                      final updateTimestamp =
+                                                          getCurrentTimestamp;
+                                                      final friendName =
+                                                          listViewStatusRecord
+                                                              .friendName;
+                                                      final friendPhotoUrl =
+                                                          listViewStatusRecord
+                                                              .friendPhotoUrl;
 
-                                                              final pingsRecordData =
-                                                                  createPingsRecordData(
-                                                                sender: sender,
-                                                                receiver:
-                                                                    receiver,
-                                                                updateTimestamp:
-                                                                    updateTimestamp,
-                                                              );
+                                                      final pingsRecordData =
+                                                          createPingsRecordData(
+                                                        receiver: receiver,
+                                                        sender: sender,
+                                                        updateTimestamp:
+                                                            updateTimestamp,
+                                                        friendName: friendName,
+                                                        friendPhotoUrl:
+                                                            friendPhotoUrl,
+                                                      );
 
-                                                              await PingsRecord
-                                                                  .collection
-                                                                  .doc()
-                                                                  .set(
-                                                                      pingsRecordData);
-                                                            },
-                                                            icon: Icon(
-                                                              Icons.soap,
-                                                              color: FlutterFlowTheme
-                                                                  .secondaryColor,
-                                                              size: 25,
-                                                            ),
-                                                            iconSize: 25,
-                                                          );
-                                                        },
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              ],
+                                                      await PingsRecord
+                                                          .collection
+                                                          .doc()
+                                                          .set(pingsRecordData);
+                                                    },
+                                                    child: Icon(
+                                                      Icons.soap_rounded,
+                                                      color: FlutterFlowTheme
+                                                          .secondaryColor,
+                                                      size: 24,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           );
-                                        }),
+                                        },
                                       );
                                     },
                                   )
