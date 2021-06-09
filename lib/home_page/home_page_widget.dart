@@ -676,9 +676,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       final updateTimestamp =
                                                           getCurrentTimestamp;
                                                       final friendName =
-                                                          currentUserDisplayName;
+                                                          homePageUsersRecord
+                                                              .displayName;
                                                       final friendPhotoUrl =
-                                                          currentUserPhoto;
+                                                          homePageUsersRecord
+                                                              .photoUrl;
 
                                                       final pingsRecordData =
                                                           createPingsRecordData(
