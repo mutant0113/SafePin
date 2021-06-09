@@ -484,21 +484,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Text(
-                                                              dateTimeFormat(
-                                                                  'relative',
-                                                                  listViewStatusRecord
-                                                                      .updateTimestamp
-                                                                      .toDate()),
-                                                              style:
-                                                                  FlutterFlowTheme
-                                                                      .bodyText2
-                                                                      .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                fontSize: 10,
-                                                              ),
-                                                            ),
                                                             Padding(
                                                               padding:
                                                                   EdgeInsets
@@ -527,12 +512,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   listViewStatusRecord
                                                                       .updateTimestamp
                                                                       .toDate()),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
                                                               style:
                                                                   FlutterFlowTheme
                                                                       .bodyText2
                                                                       .override(
                                                                 fontFamily:
                                                                     'Poppins',
+                                                                color: Color(
+                                                                    0x851A1A1A),
                                                                 fontSize: 10,
                                                               ),
                                                             )
@@ -580,6 +570,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                         .override(
                                                                       fontFamily:
                                                                           'Poppins',
+                                                                      color: FlutterFlowTheme
+                                                                          .secondaryColor,
                                                                     ),
                                                                   ),
                                                                 )
@@ -620,6 +612,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                         .override(
                                                                       fontFamily:
                                                                           'Poppins',
+                                                                      color: FlutterFlowTheme
+                                                                          .secondaryColor,
                                                                     ),
                                                                   ),
                                                                 )
@@ -660,6 +654,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                         .override(
                                                                       fontFamily:
                                                                           'Poppins',
+                                                                      color: FlutterFlowTheme
+                                                                          .secondaryColor,
                                                                     ),
                                                                   ),
                                                                 )
@@ -706,7 +702,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     child: Icon(
                                                       Icons.soap_rounded,
                                                       color: FlutterFlowTheme
-                                                          .secondaryColor,
+                                                          .primaryColor,
                                                       size: 24,
                                                     ),
                                                   )
