@@ -535,7 +535,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   Padding(
                                                     padding:
                                                         EdgeInsets.fromLTRB(
-                                                            16, 1, 0, 0),
+                                                            1, 1, 0, 0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.min,
