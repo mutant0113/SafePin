@@ -312,91 +312,157 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           final listViewPingsRecord =
                                               listViewPingsRecordList[
                                                   listViewIndex];
-                                          return Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                16, 0, 16, 1),
-                                            child: Container(
-                                              width: 100,
-                                              height: 100,
-                                              decoration: BoxDecoration(
-                                                color: FlutterFlowTheme
-                                                    .tertiaryColor,
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Container(
-                                                    width: 60,
-                                                    height: 60,
-                                                    clipBehavior:
-                                                        Clip.antiAlias,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Image.network(
-                                                      listViewPingsRecord
-                                                          .friendPhotoUrl,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            16, 1, 0, 0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          listViewPingsRecord
-                                                              .friendName,
-                                                          style:
-                                                              FlutterFlowTheme
-                                                                  .bodyText1
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          'How are you doing?',
-                                                          style:
-                                                              FlutterFlowTheme
-                                                                  .bodyText2
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      await listViewPingsRecord
-                                                          .reference
-                                                          .delete();
-                                                    },
-                                                    child: Icon(
-                                                      Icons.reply,
-                                                      color: FlutterFlowTheme
-                                                          .primaryColor,
-                                                      size: 24,
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                          return StreamBuilder<
+                                              List<StatusRecord>>(
+                                            stream: queryStatusRecord(
+                                              queryBuilder: (statusRecord) =>
+                                                  statusRecord
+                                                      .where('user',
+                                                          isEqualTo:
+                                                              listViewPingsRecord
+                                                                  .sender)
+                                                      .where('friend',
+                                                          isEqualTo:
+                                                              currentUserReference),
+                                              singleRecord: true,
                                             ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                    child:
+                                                        CircularProgressIndicator());
+                                              }
+                                              List<StatusRecord>
+                                                  containerStatusRecordList =
+                                                  snapshot.data;
+                                              // Customize what your widget looks like with no query results.
+                                              if (snapshot.data.isEmpty) {
+                                                // return Container();
+                                                // For now, we'll just include some dummy data.
+                                                containerStatusRecordList =
+                                                    createDummyStatusRecord(
+                                                        count: 1);
+                                              }
+                                              final containerStatusRecord =
+                                                  containerStatusRecordList
+                                                      .first;
+                                              return Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    16, 0, 16, 1),
+                                                child: Container(
+                                                  width: 100,
+                                                  height: 100,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme
+                                                        .tertiaryColor,
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceAround,
+                                                    children: [
+                                                      Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Image.network(
+                                                          listViewPingsRecord
+                                                              .friendPhotoUrl,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                16, 1, 0, 0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              listViewPingsRecord
+                                                                  .friendName,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText1
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              'How are you doing?',
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .bodyText2
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          await listViewPingsRecord
+                                                              .reference
+                                                              .delete();
+                                                          final friendLastMask =
+                                                              homePageUsersRecord
+                                                                  .mask;
+                                                          final friendLastAlcohol =
+                                                              homePageUsersRecord
+                                                                  .alcohol;
+                                                          final friendLastFood =
+                                                              homePageUsersRecord
+                                                                  .food;
+
+                                                          final statusRecordData =
+                                                              createStatusRecordData(
+                                                            friendLastMask:
+                                                                friendLastMask,
+                                                            friendLastAlcohol:
+                                                                friendLastAlcohol,
+                                                            friendLastFood:
+                                                                friendLastFood,
+                                                          );
+
+                                                          await containerStatusRecord
+                                                              .reference
+                                                              .update(
+                                                                  statusRecordData);
+                                                        },
+                                                        child: Icon(
+                                                          Icons.reply,
+                                                          color:
+                                                              FlutterFlowTheme
+                                                                  .primaryColor,
+                                                          size: 24,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           );
                                         },
                                       );
