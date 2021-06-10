@@ -434,6 +434,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           final friendLastFood =
                                                               homePageUsersRecord
                                                                   .food;
+                                                          final friendName =
+                                                              homePageUsersRecord
+                                                                  .displayName;
+                                                          final friendPhotoUrl =
+                                                              homePageUsersRecord
+                                                                  .photoUrl;
+                                                          final updateTimestamp =
+                                                              getCurrentTimestamp;
+                                                          final hasPingedFriend =
+                                                              false;
 
                                                           final statusRecordData =
                                                               createStatusRecordData(
@@ -443,6 +453,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 friendLastAlcohol,
                                                             friendLastFood:
                                                                 friendLastFood,
+                                                            friendName:
+                                                                friendName,
+                                                            friendPhotoUrl:
+                                                                friendPhotoUrl,
+                                                            updateTimestamp:
+                                                                updateTimestamp,
+                                                            hasPingedFriend:
+                                                                hasPingedFriend,
                                                           );
 
                                                           await containerStatusRecord
@@ -763,6 +781,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           .collection
                                                           .doc()
                                                           .set(pingsRecordData);
+                                                      final hasPingedFriend =
+                                                          true;
+
+                                                      final statusRecordData =
+                                                          createStatusRecordData(
+                                                        hasPingedFriend:
+                                                            hasPingedFriend,
+                                                      );
+
+                                                      await listViewStatusRecord
+                                                          .reference
+                                                          .update(
+                                                              statusRecordData);
                                                     },
                                                     child: Icon(
                                                       Icons.soap_rounded,
