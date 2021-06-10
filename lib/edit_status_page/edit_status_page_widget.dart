@@ -30,23 +30,14 @@ class _EditStatusPageWidgetState extends State<EditStatusPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<UsersRecord>>(
-      stream: queryUsersRecord(
-        singleRecord: true,
-      ),
+    return StreamBuilder<UsersRecord>(
+      stream: UsersRecord.getDocument(currentUserReference),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Center(child: CircularProgressIndicator());
         }
-        List<UsersRecord> editStatusPageUsersRecordList = snapshot.data;
-        // Customize what your widget looks like with no query results.
-        if (snapshot.data.isEmpty) {
-          // return Container();
-          // For now, we'll just include some dummy data.
-          editStatusPageUsersRecordList = createDummyUsersRecord(count: 1);
-        }
-        final editStatusPageUsersRecord = editStatusPageUsersRecordList.first;
+        final editStatusPageUsersRecord = snapshot.data;
         return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
